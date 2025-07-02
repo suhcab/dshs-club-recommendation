@@ -179,3 +179,31 @@ body::before {
   filter: blur(8px);
   z-index: -1; /* 컨텐츠 뒤에 배치 */
 }
+/* 1) 뒤로가기 버튼을 본문 위로 띄워 잘 보이게 */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.8); /* 반투명 배경 추가 */
+  border-radius: 6px;                   /* 둥근 모서리 */
+  padding: 4px 8px;                     /* 여유 공간 확보 */
+  color: #333;
+  z-index: 2;                           /* 배경보다 위에 */
+  text-shadow: 0 0 4px rgba(255,255,255,0.8);
+}
+
+#mainPage,
+#subjectPage,
+#clubIntroPage,
+#surveyPage,
+#resultPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 수직 중앙 */
+  align-items: center;      /* 수평 중앙 */
+  text-align: center;
+  min-height: 100vh;        /* 전체 높이 채움 */
+  padding: 20px;            /* 모바일 여백 확보 */
+  box-sizing: border-box;
+}
