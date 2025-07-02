@@ -1,133 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>동아리 추천 프로그램</title>
-  <link rel="stylesheet" href="main.css">
-  <style>
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('./background.png');
-      background-size: cover;
-      background-position: center;
-      filter: blur(8px);
-      z-index: -1;
-    }
-
-    body {
-      font-family: "맑은 고딕", sans-serif;
-      background-color: rgba(255, 255, 255, 0.75);
-      margin: 0;
-      padding: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    #mainPage, #subjectPage, #clubIntroPage {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      width: 100%;
-    }
-
-    h1 {
-      margin-top: 0;
-      font-size: 32px;
-    }
-
-    .start-button {
-      margin: 20px 0 30px;
-      padding: 12px 24px;
-      font-size: 20px;
-      border-radius: 10px;
-      background-color: #2196f3;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .subject-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 600px;
-      width: 100%;
-      justify-items: center;
-    }
-
-    .subject-grid button {
-      width: 160px;
-      height: 70px;
-      font-size: 22px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .subject-grid button:hover {
-      background-color: #45a049;
-    }
-
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 24px;
-      background: rgba(0, 0, 0, 0.5);
-      border: none;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    .back-button:hover {
-      color: #ccc;
-    }
-
-    #clubList button {
-      padding: 20px 40px;
-      font-size: 24px;
-      background-color: #2196f3;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      margin: 10px;
-      cursor: pointer;
-    }
-
-    #clubList button:hover {
-      background-color: #1976d2;
-    }
-
-    .club-card {
-      background-color: #ffffff;
-      border: 2px solid #cccccc;
-      border-radius: 12px;
-      max-width: 700px;
-      width: 90%;
-      padding: 30px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: left;
-      line-height: 1.6;
-      font-size: 17px;
-    }
-  </style>
+  <link rel="stylesheet" href="main.css" />
 </head>
 <body>
+  <!-- 메인 페이지 -->
   <div id="mainPage">
     <h1>동아리 추천 프로그램</h1>
     <button class="start-button" onclick="startSurvey()">설문조사 시작</button>
@@ -141,15 +21,33 @@
     </div>
   </div>
 
-  <div id="subjectPage" style="display:none">
+  <!-- 동아리 리스트 페이지 -->
+  <div id="subjectPage" style="display: none">
     <button class="back-button" onclick="goBack()">←</button>
     <h2 id="subject-title"></h2>
-    <div id="clubList"></div>
+    <div id="clubListPage">
+      <div id="clubList"></div>
+    </div>
   </div>
 
-  <div id="clubIntroPage" style="display:none">
+  <!-- 동아리 소개 페이지 -->
+  <div id="clubIntroPage" style="display: none">
     <button class="back-button" onclick="goBack()">←</button>
     <div id="clubIntroBox" class="club-card"></div>
+  </div>
+
+  <!-- 설문 페이지 (예시) -->
+  <div id="surveyPage" style="display: none">
+    <!-- 설문 폼 삽입 영역 -->
+  </div>
+
+  <!-- 결과 페이지 (예시) -->
+  <div id="resultPage" style="display: none">
+    <div id="resultContent">
+      <p id="result1st"></p>
+      <p id="result2nd"></p>
+      <p id="result3rd"></p>
+    </div>
   </div>
 
   <script src="main.js"></script>
