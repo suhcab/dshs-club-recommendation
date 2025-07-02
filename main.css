@@ -5,9 +5,41 @@ body {
   margin: 0;
   padding: 0;
 }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("background.png") center/cover no-repeat;
+  filter: blur(8px);
+  z-index: -1;
+}
 
+.page {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#mainPage {
+  display: flex;
+}
 h1, h2 {
-  margin-top: 40px;
+  position: relative;
+  display: inline-block;
+  padding: 0 12px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  margin: 40px 0;
+  z-index: 1;
 }
 
 .start-button {
