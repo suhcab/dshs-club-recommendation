@@ -22,17 +22,14 @@ h1, h2 {
 }
 
 .subject-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: 40px;
-
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 40px auto;
   padding: 0 20px;
+  justify-items: center;
+  align-items: center;
 }
 
 .subject-grid button {
