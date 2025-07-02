@@ -63,8 +63,10 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 0 20px;
+  justify-items: center;
+  align-items: center;
 }
 
 .subject-grid button {
@@ -83,6 +85,14 @@ body {
 }
 .subject-grid button:hover {
   background-color: #45a049;
+}
+
+/* 동아리 리스트 컨테이너 */
+#clubList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
 }
 
 /* 동아리 리스트 버튼 */
