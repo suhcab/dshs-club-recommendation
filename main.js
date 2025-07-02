@@ -75,20 +75,25 @@ let currentPage = "main";
 let previousPage = "";
 
 function showMain() {
+  // 이전 페이지 기록
   previousPage = currentPage;
   currentPage = "main";
-  document.getElementById("mainPage").style.display = "block";
-  document.getElementById("subjectPage").style.display = "none";
-  document.getElementById("clubIntroPage").style.display = "none";
-  document.getElementById("surveyPage").style.display = "none";
-  document.getElementById("resultPage").style.display = "none";
+
+  // 모든 페이지 숨기기
+  ["mainPage","subjectPage","clubIntroPage","surveyPage","resultPage"]
+    .forEach(id => {
+      document.getElementById(id).style.display = "none";
+    });
+
+  // 메인 페이지만 flex 컨테이너로 보이기
+  document.getElementById("mainPage").style.display = "flex";
 }
 
 function showSubjects(subject) {
   previousPage = currentPage;
   currentPage = "subject";
   document.getElementById("mainPage").style.display = "none";
-  document.getElementById("subjectPage").style.display = "block";
+  document.getElementById("subjectPage").style.display = "flex";
   document.getElementById("clubIntroPage").style.display = "none";
   document.getElementById("surveyPage").style.display = "none";
   document.getElementById("resultPage").style.display = "none";
@@ -116,7 +121,7 @@ function showClubIntro(subject, clubName) {
   currentPage = "intro";
   document.getElementById("mainPage").style.display = "none";
   document.getElementById("subjectPage").style.display = "none";
-  document.getElementById("clubIntroPage").style.display = "block";
+  document.getElementById("clubIntroPage").style.display = "flex";
   document.getElementById("surveyPage").style.display = "none";
   document.getElementById("resultPage").style.display = "none";
 
@@ -133,19 +138,19 @@ function goBack() {
   if (currentPage === "intro") {
     currentPage = "subject";
     document.getElementById("clubIntroPage").style.display = "none";
-    document.getElementById("subjectPage").style.display = "block";
+    document.getElementById("subjectPage").style.display = "flex";
   } else if (currentPage === "subject") {
     currentPage = "main";
     document.getElementById("subjectPage").style.display = "none";
-    document.getElementById("mainPage").style.display = "block";
+    document.getElementById("mainPage").style.display = "flex";
   } else if (currentPage === "survey") {
     currentPage = "main";
     document.getElementById("surveyPage").style.display = "none";
-    document.getElementById("mainPage").style.display = "block";
+    document.getElementById("mainPage").style.display = "flex";
   } else if (currentPage === "result") {
     currentPage = "main";
     document.getElementById("resultPage").style.display = "none";
-    document.getElementById("mainPage").style.display = "block";
+    document.getElementById("mainPage").style.display = "flex";
   }
 }
 
@@ -155,7 +160,7 @@ function startSurvey() {
   document.getElementById("mainPage").style.display = "none";
   document.getElementById("subjectPage").style.display = "none";
   document.getElementById("clubIntroPage").style.display = "none";
-  document.getElementById("surveyPage").style.display = "block";
+  document.getElementById("surveyPage").style.display = "flex";
   document.getElementById("resultPage").style.display = "none";
 }
 
@@ -166,7 +171,7 @@ function showResult() {
   document.getElementById("subjectPage").style.display = "none";
   document.getElementById("clubIntroPage").style.display = "none";
   document.getElementById("surveyPage").style.display = "none";
-  document.getElementById("resultPage").style.display = "block";
+  document.getElementById("resultPage").style.display = "flex";
 } 
 
 function showResult() {
@@ -231,7 +236,7 @@ function showResult() {
   document.getElementById("result3rd").innerText = `3등: ${scores[2].club} (추천율: ${scores[2].matchRate}%)`;
 
   document.getElementById("surveyPage").style.display = "none";
-  document.getElementById("resultPage").style.display = "block";
+  document.getElementById("resultPage").style.display = "flex";
   currentPage = "result";
 }
 
