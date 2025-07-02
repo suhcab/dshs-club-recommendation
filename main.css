@@ -1,3 +1,4 @@
+/* 배경 이미지 흐림 효과 */
 body {
   position: relative;
   z-index: 0;
@@ -8,8 +9,10 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: url("background.png") center/cover no-repeat;
   filter: blur(8px);
   z-index: -1;
@@ -21,10 +24,10 @@ body::before {
 #clubIntroPage,
 #surveyPage,
 #resultPage {
-  display: flex;            /* JS에서 flex 로 띄워야 활성화 */
+  display: flex;
   flex-direction: column;
-  justify-content: center;  /* 수직 중앙 */
-  align-items: center;      /* 수평 중앙 */
+  justify-content: center;
+  align-items: center;
   text-align: center;
   min-height: 100vh;
   padding: 20px;
@@ -143,8 +146,6 @@ button[type="button"]:hover,
   width: 70%;
   max-width: 800px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-
-  /* 여기에 중앙 정렬 속성 추가 */
   display: flex !important;
   justify-content: center;
   align-items: center;
