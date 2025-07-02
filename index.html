@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <style>body { outline: 10px solid hotpink !important; }</style>
   <meta charset="UTF-8">
   <title>동아리 추천 프로그램</title>
-  <link rel="stylesheet" href="main.css?v=2">
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
   <div id="mainPage">
@@ -33,7 +32,7 @@
 
   <div id="surveyPage" style="display:none">
     <button class="back-button" onclick="goBack()">←</button>
-    <form id="surveyForm" name="surveyForm" onsubmit="event.preventDefault(); showResult();">
+    <form id="surveyForm" onsubmit="event.preventDefault(); showResult();">
       <button type="button" onclick="resetSurvey()">초기화</button>
       <div class="question">
         <p><strong>1. 가장 흥미를 느끼는 과목은 무엇인가요?<strong></p>
@@ -93,6 +92,6 @@
     </div>
   </div>
 
-  <script src="main.js?v=2" defer></script>
+  <script src="main.js"></script>
 </body>
 </html>
