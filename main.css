@@ -182,3 +182,11 @@ button[type="submit"] {
   font-weight: bold;
   margin-top: 20px;
 }
+#clubListPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
