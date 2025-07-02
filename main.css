@@ -1,93 +1,51 @@
-/* main.css */
-
-/* 흐릿한 배경 이미지 */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('./background.png');
-  background-size: cover;
-  background-position: center;
-  filter: blur(8px);
-  z-index: -1;
-}
-
-/* 전체 기본 설정 */
 body {
-  background-color: rgba(255, 255, 255, 0.75);
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
   font-family: "맑은 고딕", sans-serif;
+  text-align: center;
+  background-color: #f0f8ff;
+  margin: 0;
+  padding: 0;
 }
 
-/* 각 페이지 중앙 정렬 */
-#mainPage, #subjectPage, #clubIntroPage {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  width: 100%;
+h1, h2 {
+  margin-top: 40px;
 }
 
-/* 돌아가기 버튼 */
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 24px;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
+.start-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 10px;
+  background-color: #2196f3;
   color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
+  border: none;
   cursor: pointer;
-  z-index: 2;
-}
-.back-button:hover {
-  color: #ccc;
 }
 
-/* 과목 선택 버튼 그리드 */
 .subject-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 600px;
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 0 20px;
-  justify-items: center;
-  align-items: center;
 }
 
 .subject-grid button {
-  width: 180px;
-  height: 80px;
-  font-size: 24px;
+  padding: 30px 0;
+  font-size: 20px;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.2s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
+
 .subject-grid button:hover {
   background-color: #45a049;
 }
 
-/* 동아리 리스트 컨테이너 */
+#club-buttons,
 #clubList {
   display: flex;
   flex-direction: column;
@@ -95,22 +53,50 @@ body {
   margin-top: 30px;
 }
 
-/* 동아리 리스트 버튼 */
-#clubList button {
-  padding: 20px 40px;
-  font-size: 24px;
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 12px;
+.clubButton {
+  width: 200px;
   margin: 10px;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
-}
-#clubList button:hover {
-  background-color: #1976d2;
+  transition: background-color 0.2s;
 }
 
-/* 동아리 소개 카드 */
+.clubButton:hover {
+  background-color: #388e3c;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  color: #000;
+}
+
+#club-intro-screen,
+#clubIntroPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;         
+  justify-content: center;     
+  min-height: 100vh;           
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.club-card,
 .club-card {
   background-color: #ffffff;
   border: 2px solid #cccccc;
@@ -125,7 +111,6 @@ body {
   margin: 0 auto;
 }
 
-/* 설문 영역 */
 #surveyPage {
   background-color: #f3f8fd;
   padding: 30px;
@@ -137,13 +122,11 @@ body {
 .question {
   margin-bottom: 30px;
   font-size: 18px;
-  font-weight: bold;
 }
 .question label {
   margin-right: 10px;
   display: inline-block;
   font-size: 16px;
-  font-weight: normal;
 }
 button[type="submit"] {
   background-color: #4CAF50;
@@ -155,7 +138,6 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-/* 결과 페이지 */
 #resultPage {
   background-color: #fefefe;
   padding: 40px 20px;
@@ -178,7 +160,7 @@ button[type="submit"] {
 }
 
 #result1st {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   margin-top: 20px;
 }
