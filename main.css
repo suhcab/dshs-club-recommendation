@@ -189,21 +189,34 @@ body::before {
   border-radius: 6px;                   /* 둥근 모서리 */
   padding: 4px 8px;                     /* 여유 공간 확보 */
   color: #333;
-  z-index: 2;                           /* 배경보다 위에 */
+  z-index: 5;                           /* 배경보다 위에 */
   text-shadow: 0 0 4px rgba(255,255,255,0.8);
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
 }
 
+/* main.css 에 추가 */
 #mainPage,
 #subjectPage,
 #clubIntroPage,
 #surveyPage,
 #resultPage {
-  display: flex;
+  display: flex;              /* JS 에서도 flex 로 띄울 것 */
   flex-direction: column;
-  justify-content: center;  /* 수직 중앙 */
-  align-items: center;      /* 수평 중앙 */
+  justify-content: center;    /* 수직 중앙 */
+  align-items: center;        /* 수평 중앙 */
   text-align: center;
-  min-height: 100vh;        /* 전체 높이 채움 */
-  padding: 20px;            /* 모바일 여백 확보 */
+  min-height: 100vh;
+  padding: 20px;
   box-sizing: border-box;
 }
+/* h1/h2 뒤에 반투명&블러 */
+h1, h2 {
+  position: relative;
+  display: inline-block;
+  padding: 0 12px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
