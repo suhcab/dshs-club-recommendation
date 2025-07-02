@@ -72,44 +72,45 @@ const clubData = {
 };
   
 let currentPage = "main";
-let previousPage = "";
-const pages = ["mainPage","subjectPage","clubIntroPage","surveyPage","resultPage"];
+let pageStack = [];
+const pages = [
+  "mainPage", "subjectPage", "clubIntroPage", "surveyPage", "resultPage"
+];
 
+// 모든 페이지 숨김
 function hideAll() {
-  pages.forEach(id => document.getElementById(id).style.display = "none");
+  pages.forEach(id => {
+    document.getElementById(id).style.display = "none";
+  });
 }
 
+// 페이지 보여주기 + 스택에 저장
+function showPage(id) {
+  hideAll();
+  document.getElementById(id).style.display = "flex";
+  pageStack.push(id);
+}
+
+// 메인 화면
 function showMain() {
-  previousPage = currentPage;
-  currentPage = "main";
-  hideAll();
-  document.getElementById("mainPage").style.display = "flex";
+  showPage("mainPage");
 }
 
+// 과목 목록
 function showSubjects(subject) {
-  previousPage = currentPage;
-  currentPage = "subject";
-  hideAll();
-  document.getElementById("subjectPage").style.display = "flex";
-
+  showPage("subjectPage");
+  // 제목 설정
   const titles = {
-    math: '수학 동아리',
-    physics: '물리 동아리',
-    chemistry: '화학 동아리',
-    earth: '지구과학 동아리',
-    bio: '생물 동아리',
-    cs: '정보 동아리'
+    math: '수학 동아리', physics: '물리 동아리',
+    chemistry: '화학 동아리', earth: '지구과학 동아리',
+    bio: '생물 동아리', cs: '정보 동아리'
   };
   document.getElementById("subject-title").innerText = titles[subject] || "";
 
+  // 동아리 버튼 생성
   const clubList = document.getElementById("clubList");
   clubList.innerHTML = "";
-  const clubs = clubData[subject] || [];
-  if (!clubs.length) {
-    clubList.innerHTML = "<p>해당 과목의 동아리가 없습니다.</p>";
-    return;
-  }
-  clubs.forEach(c => {
+  (clubData[subject] || []).forEach(c => {
     const btn = document.createElement("button");
     btn.className = "clubButton";
     btn.innerText = c.name;
@@ -118,51 +119,27 @@ function showSubjects(subject) {
   });
 }
 
-function showClubIntro(subject, clubName) {
-  previousPage = currentPage;
-  currentPage = "intro";
-  hideAll();
-  document.getElementById("clubIntroPage").style.display = "flex";
-
-  const club = (clubData[subject] || []).find(c => c.name === clubName);
+// 동아리 소개
+function showClubIntro(subject, name) {
+  showPage("clubIntroPage");
+  const club = (clubData[subject] || []).find(c => c.name === name);
   const box = document.getElementById("clubIntroBox");
-  box.className = "club-card";  // 카드 스타일 적용
+  box.className = "club-card";
   box.innerHTML = club
     ? `<h2>${club.name}</h2><p>${club.desc}</p>`
     : `<p>동아리 정보를 찾을 수 없습니다.</p>`;
 }
 
-function goBack() {
-  hideAll();
-  switch (previousPage) {
-    case "subject":
-      document.getElementById("subjectPage").style.display = "flex"; break;
-    case "intro":
-      document.getElementById("clubIntroPage").style.display = "flex"; break;
-    case "survey":
-      document.getElementById("surveyPage").style.display = "flex"; break;
-    case "result":
-      document.getElementById("resultPage").style.display = "flex"; break;
-    default:
-      document.getElementById("mainPage").style.display = "flex";
-  }
-  currentPage = previousPage;
-}
-
+// 설문 시작
 function startSurvey() {
-  previousPage = currentPage;
-  currentPage = "survey";
-  hideAll();
-  document.getElementById("surveyPage").style.display = "flex";
+  showPage("surveyPage");
 }
 
+// 결과 표시
 function showResult() {
-  previousPage = currentPage;
-  currentPage = "result";
-  hideAll();
-  document.getElementById("resultPage").style.display = "flex";
+  showPage("resultPage");
 
-  const form = document.forms['surveyForm'];
+  const form = document.getElementById('surveyForm');
   const subject = form.subject.value;
   const activities = Array.from(form.activities)
                           .filter(a => a.checked)
@@ -171,42 +148,60 @@ function showResult() {
   const dining = form.dining.value;
   const difficulty = form.difficulty.value;
 
-  const scoreTable = {/* 기존 값 그대로 */};
-  const preferenceWeight = {/* 기존 값 그대로 */};
+  // 점수 계산 테이블
+  const scoreTable = {
+    "수랑사랑": { base: 55, subject: "수학", senior: 3, dining: 2, difficulty: 2, activity: ["대회 참가","학술적 탐구"] },
+    "파이": { base: 63, subject: "수학", senior: 2, dining: 1, difficulty: 3, activity: ["학회 발표","논문게재"] },
+    "시그마": { base: 15, subject: "수학", senior: 1, dining: 1, difficulty: 3, activity: ["논문게재","학술적 탐구"] },
+    "MATHrix": { base: 43, subject: "수학", senior: 3, dining: 2, difficulty: 3, activity: ["학회 발표","대회 참가"] },
+    "BLITZ": { base: 68, subject: "물리", senior: 3, dining: 1, difficulty: 2, activity: ["학회 발표","실험"] },
+    "로보티즈": { base: 41, subject: "물리, 정보", senior: 3, dining: 2, difficulty: 2, activity: ["실험","대회 참가"] },
+    "무한상상": { base: 64, subject: "물리", senior: 2, dining: 2, difficulty: 1, activity: ["교류전","기기관리"] },
+    "C.C": { base: 55, subject: "화학", senior: 3, dining: 2, difficulty: 2, activity: ["실험","대회 참가"] },
+    "CHAL C": { base: 53, subject: "화학", senior: 2, dining: 1, difficulty: 1, activity: ["논문세미나","실험"] },
+    "CHEM": { base: 52, subject: "화학", senior: 3, dining: 1, difficulty: 2, activity: ["기기관리","실험"] },
+    "BIO": { base: 72, subject: "생물", senior: 3, dining: 3, difficulty: 1, activity: ["교류전","대회 참가"] },
+    "LIFE": { base: 73, subject: "생물", senior: 1, dining: 1, difficulty: 1, activity: ["학회 발표","실험"] },
+    "별누리": { base: 73, subject: "지구과학", senior: 1, dining: 1, difficulty: 1, activity: ["학회 발표","대회 참가"] },
+    "파인애플": { base: 60, subject: "정보", senior: 2, dining: 3, difficulty: 2, activity: ["대회 참가","학술적 탐구"] }
+  };
+  const preferenceWeight = { "많음":3, "중간":2, "적음":1, "적당":2, "많이":3, "적게":1, "어려움":3, "적절":2, "쉬움":1 };
   const maxScore = 313;
-  const results = [];
+  const scores = [];
 
   for (let club in scoreTable) {
     let score = scoreTable[club].base;
     const subs = scoreTable[club].subject.split(", ");
-    if (subject === "모름") {
-      if (subs.includes("수학")) score += 20;
-    } else if (subs.includes(subject)) {
-      score += 100;
+    if ((subject === "모름" && subs.includes("수학")) || subs.includes(subject)) {
+      score += (subject === "모름" ? 20 : 100);
     }
     activities.forEach(act => {
       if (scoreTable[club].activity.includes(act)) score += 40;
     });
-    if (preferenceWeight[senior]   === scoreTable[club].senior)   score += 20;
-    if (preferenceWeight[dining]   === scoreTable[club].dining)   score += 20;
-    if (preferenceWeight[difficulty]=== scoreTable[club].difficulty) score += 20;
-    results.push({ club, matchRate: Math.round((score/maxScore)*100) });
+    [senior, dining, difficulty].forEach(key => {
+      if (preferenceWeight[key] === scoreTable[club][key]) score += 20;
+    });
+    scores.push({ club, matchRate: Math.round((score/maxScore)*100) });
   }
-  results.sort((a,b)=>b.matchRate-a.matchRate);
+  scores.sort((a,b) => b.matchRate - a.matchRate);
 
-  document.getElementById("result1st").innerText = `1등: ${results[0].club} (${results[0].matchRate}%)`;
-  document.getElementById("result2nd").innerText = `2등: ${results[1].club} (${results[1].matchRate}%)`;
-  document.getElementById("result3rd").innerText = `3등: ${results[2].club} (${results[2].matchRate}%)`;
+  document.getElementById("result1st").innerText = `1등: ${scores[0].club} (${scores[0].matchRate}%)`;
+  document.getElementById("result2nd").innerText = `2등: ${scores[1].club} (${scores[1].matchRate}%)`;
+  document.getElementById("result3rd").innerText = `3등: ${scores[2].club} (${scores[2].matchRate}%)`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const boxes = document.querySelectorAll('input[name="activities"]');
-  boxes.forEach(cb => cb.addEventListener('change', () => {
-    const checked = Array.from(boxes).filter(c=>c.checked);
-    if (checked.length > 2) {
-      cb.checked = false;
-      alert("활동은 두 개까지만 선택할 수 있습니다.");
-    }
+// 뒤로가기
+function goBack() {
+  pageStack.pop();            // 현재 페이지 팝
+  const prev = pageStack.pop() || "mainPage";
+  showPage(prev);
+}
+
+// 체크박스 2개 제한 및 초기화
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('input[name="activities"]').forEach(cb => cb.addEventListener('change', () => {
+    const checked = [...document.querySelectorAll('input[name="activities"]')].filter(c=>c.checked);
+    if (checked.length > 2) { cb.checked = false; alert("활동은 두 개까지만 선택할 수 있습니다."); }
   }));
   showMain();
 });
