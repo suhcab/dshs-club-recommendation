@@ -73,18 +73,12 @@ const clubData = {
   
 let currentPage = "main";
 let previousPage = "";
-
-// 모든 페이지 ID 목록
 const pages = ["mainPage","subjectPage","clubIntroPage","surveyPage","resultPage"];
 
-// 공통: 모든 페이지 숨기기
 function hideAll() {
-  pages.forEach(id => {
-    document.getElementById(id).style.display = "none";
-  });
+  pages.forEach(id => document.getElementById(id).style.display = "none");
 }
 
-// showMain
 function showMain() {
   previousPage = currentPage;
   currentPage = "main";
@@ -92,14 +86,12 @@ function showMain() {
   document.getElementById("mainPage").style.display = "flex";
 }
 
-// showSubjects
 function showSubjects(subject) {
   previousPage = currentPage;
   currentPage = "subject";
   hideAll();
   document.getElementById("subjectPage").style.display = "flex";
 
-  // 제목 매핑
   const titles = {
     math: '수학 동아리',
     physics: '물리 동아리',
@@ -110,7 +102,6 @@ function showSubjects(subject) {
   };
   document.getElementById("subject-title").innerText = titles[subject] || "";
 
-  // 동아리 리스트 생성
   const clubList = document.getElementById("clubList");
   clubList.innerHTML = "";
   const clubs = clubData[subject] || [];
@@ -127,7 +118,6 @@ function showSubjects(subject) {
   });
 }
 
-// showClubIntro
 function showClubIntro(subject, clubName) {
   previousPage = currentPage;
   currentPage = "intro";
@@ -136,35 +126,29 @@ function showClubIntro(subject, clubName) {
 
   const club = (clubData[subject] || []).find(c => c.name === clubName);
   const box = document.getElementById("clubIntroBox");
+  box.className = "club-card";  // 카드 스타일 적용
   box.innerHTML = club
     ? `<h2>${club.name}</h2><p>${club.desc}</p>`
     : `<p>동아리 정보를 찾을 수 없습니다.</p>`;
 }
 
-// goBack
 function goBack() {
   hideAll();
-  // 이전 페이지를 flex로
-  switch(previousPage) {
+  switch (previousPage) {
     case "subject":
-      document.getElementById("subjectPage").style.display = "flex";
-      break;
+      document.getElementById("subjectPage").style.display = "flex"; break;
     case "intro":
-      document.getElementById("clubIntroPage").style.display = "flex";
-      break;
+      document.getElementById("clubIntroPage").style.display = "flex"; break;
     case "survey":
-      document.getElementById("surveyPage").style.display = "flex";
-      break;
+      document.getElementById("surveyPage").style.display = "flex"; break;
     case "result":
-      document.getElementById("resultPage").style.display = "flex";
-      break;
+      document.getElementById("resultPage").style.display = "flex"; break;
     default:
       document.getElementById("mainPage").style.display = "flex";
   }
   currentPage = previousPage;
 }
 
-// startSurvey
 function startSurvey() {
   previousPage = currentPage;
   currentPage = "survey";
@@ -172,14 +156,12 @@ function startSurvey() {
   document.getElementById("surveyPage").style.display = "flex";
 }
 
-// showResult (최종 함수 하나만)
 function showResult() {
   previousPage = currentPage;
   currentPage = "result";
   hideAll();
   document.getElementById("resultPage").style.display = "flex";
 
-  // 설문 데이터 읽기
   const form = document.forms['surveyForm'];
   const subject = form.subject.value;
   const activities = Array.from(form.activities)
@@ -189,18 +171,17 @@ function showResult() {
   const dining = form.dining.value;
   const difficulty = form.difficulty.value;
 
-  // 점수 계산
-  const scoreTable = {/* 기존 테이블 그대로 */};
-  const preferenceWeight = {/* 기존 맵핑 그대로 */};
+  const scoreTable = {/* 기존 값 그대로 */};
+  const preferenceWeight = {/* 기존 값 그대로 */};
   const maxScore = 313;
-  const scores = [];
+  const results = [];
 
   for (let club in scoreTable) {
     let score = scoreTable[club].base;
-    const clubSubjects = scoreTable[club].subject.split(", ");
+    const subs = scoreTable[club].subject.split(", ");
     if (subject === "모름") {
-      if (clubSubjects.includes("수학")) score += 20;
-    } else if (clubSubjects.includes(subject)) {
+      if (subs.includes("수학")) score += 20;
+    } else if (subs.includes(subject)) {
       score += 100;
     }
     activities.forEach(act => {
@@ -209,19 +190,16 @@ function showResult() {
     if (preferenceWeight[senior]   === scoreTable[club].senior)   score += 20;
     if (preferenceWeight[dining]   === scoreTable[club].dining)   score += 20;
     if (preferenceWeight[difficulty]=== scoreTable[club].difficulty) score += 20;
-    scores.push({ club, score, matchRate: Math.round((score/maxScore)*100) });
+    results.push({ club, matchRate: Math.round((score/maxScore)*100) });
   }
-  scores.sort((a,b)=>b.score-a.score);
+  results.sort((a,b)=>b.matchRate-a.matchRate);
 
-  // 결과 표시
-  document.getElementById("result1st").innerText  = `1등: ${scores[0].club} (${scores[0].matchRate}%)`;
-  document.getElementById("result2nd").innerText  = `2등: ${scores[1].club} (${scores[1].matchRate}%)`;
-  document.getElementById("result3rd").innerText  = `3등: ${scores[2].club} (${scores[2].matchRate}%)`;
+  document.getElementById("result1st").innerText = `1등: ${results[0].club} (${results[0].matchRate}%)`;
+  document.getElementById("result2nd").innerText = `2등: ${results[1].club} (${results[1].matchRate}%)`;
+  document.getElementById("result3rd").innerText = `3등: ${results[2].club} (${results[2].matchRate}%)`;
 }
 
-// 문서 로드 후 초기화
 document.addEventListener("DOMContentLoaded", () => {
-  // 체크박스 최대 2개 제한
   const boxes = document.querySelectorAll('input[name="activities"]');
   boxes.forEach(cb => cb.addEventListener('change', () => {
     const checked = Array.from(boxes).filter(c=>c.checked);
