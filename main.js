@@ -86,7 +86,7 @@ const scoreTable = {
   "MATHrix": { base: 43, subject: "수학", senior: 3, dining: 2, difficulty: 3, activity: ["학회 발표", "대회 참가"] },
   "BLITZ": { base: 68, subject: "물리", senior: 3, dining: 1, difficulty: 2, activity: ["학회 발표", "실험"] },
   "로보티즈": { base: 41, subject: "물리, 정보", senior: 3, dining: 2, difficulty: 2, activity: ["실험", "대회 참가"] },
-  "무한상상": { base: 64, subject: "물리", senior: 2, dining: 2, difficulty: 1, activity: ["교류전", "기기관리"] },
+  "무한상상": { base: 70, subject: "물리", senior: 2, dining: 2, difficulty: 1, activity: ["교류전", "기기관리"] },
   "C.C": { base: 55, subject: "화학", senior: 3, dining: 2, difficulty: 2, activity: ["실험", "대회 참가"] },
   "CHAL C": { base: 53, subject: "화학", senior: 2, dining: 1, difficulty: 1, activity: ["논문세미나", "실험"] },
   "CHEM": { base: 52, subject: "화학", senior: 3, dining: 1, difficulty: 2, activity: ["기기관리", "실험"] },
