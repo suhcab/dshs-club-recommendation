@@ -58,7 +58,7 @@ const clubData = {
     },
     {
       "name": "LIFE",
-      "desc": "라이프는 생명 동아리로, 주로 다양한 생물 실험과 탐구 활동을 중심으로 진행됩니다. 연구 학점도 부담 없이 잘 챙길 수 있어 편하게 활동할 수 있습니다. 1학년이고 생물을 잘 몰라도 누구나 쉽게 배우고 참여할 수 있어 처음 시작하는 사람도 부담 없이 활동할 수 있습니다. 인원 수가 많지 않아 한 사람 한 사람에게 집중할 수 있고, 지도 선생님께서도 세심하게 지도해 주셔서 활동이 원활하게 이루어집니다. 회식도 자주 하여 동아리원들끼리 친해지기 좋고, 실험과 탐구를 통해 진로에 도움 되는 경험을 쌓을 수 있는 좋은 동아리입니다."
+      "desc": "(가위바위보 지면 가는 동아리)라이프는 생명 동아리로, 주로 다양한 생물 실험과 탐구 활동을 중심으로 진행됩니다. 연구 학점도 부담 없이 잘 챙길 수 있어 편하게 활동할 수 있습니다. 1학년이고 생물을 잘 몰라도 누구나 쉽게 배우고 참여할 수 있어 처음 시작하는 사람도 부담 없이 활동할 수 있습니다. 인원 수가 많지 않아 한 사람 한 사람에게 집중할 수 있고, 지도 선생님께서도 세심하게 지도해 주셔서 활동이 원활하게 이루어집니다. 회식도 자주 하여 동아리원들끼리 친해지기 좋고, 실험과 탐구를 통해 진로에 도움 되는 경험을 쌓을 수 있는 좋은 동아리입니다."
     }
   ],
   "cs": [
@@ -86,7 +86,7 @@ const scoreTable = {
   "MATHrix": { base: 43, subject: "수학", senior: 3, dining: 2, difficulty: 3, activity: ["학회 발표", "대회 참가"] },
   "BLITZ": { base: 68, subject: "물리", senior: 3, dining: 1, difficulty: 2, activity: ["학회 발표", "실험"] },
   "로보티즈": { base: 41, subject: "물리, 정보", senior: 3, dining: 2, difficulty: 2, activity: ["실험", "대회 참가"] },
-  "무한상상": { base: 70, subject: "물리", senior: 2, dining: 2, difficulty: 1, activity: ["교류전", "기기관리"] },
+  "무한상상": { base: 64, subject: "물리", senior: 2, dining: 2, difficulty: 1, activity: ["교류전", "기기관리"] },
   "C.C": { base: 55, subject: "화학", senior: 3, dining: 2, difficulty: 2, activity: ["실험", "대회 참가"] },
   "CHAL C": { base: 53, subject: "화학", senior: 2, dining: 1, difficulty: 1, activity: ["논문세미나", "실험"] },
   "CHEM": { base: 52, subject: "화학", senior: 3, dining: 1, difficulty: 2, activity: ["기기관리", "실험"] },
